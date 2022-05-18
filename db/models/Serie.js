@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const SerieSchema = new Schema({
   name: String,
-  platforms: Array,
+  platforms: String,
 });
 
 const Serie = model("Serie", SerieSchema, "series");
