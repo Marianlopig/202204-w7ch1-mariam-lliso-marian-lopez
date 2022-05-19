@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../../db/models/User");
+const User = require("../../../db/models/User");
 
 const userLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -51,4 +51,3 @@ const userRegister = async (req, res, next) => {
 };
 
 module.exports = { userLogin, userRegister };
-
