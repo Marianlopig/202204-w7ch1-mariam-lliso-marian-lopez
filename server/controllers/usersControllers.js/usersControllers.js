@@ -4,13 +4,13 @@ const bcrypt = require("bcrypt");
 const User = require("../../../db/models/User");
 
 const userLogin = async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
+  const { name, password } = req.body;
+  const user = await User.findOne({ name, password });
   if (user) {
     const token = jwt.sign(
       // eslint-disable-next-line no-underscore-dangle
-      { id: user._id, username: user.username },
-      process.env.TOKEN_SECRET,
+      { id: user._id, name: user.name },
+      process.env.JWT_SECRET,
       { expiresIn: "2d" }
     );
     res.status(200).json({ token });
