@@ -1,5 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const User = require("../../db/models/User");
 
 const userLogin = async (req, res) => {
@@ -17,4 +18,37 @@ const userLogin = async (req, res) => {
     res.status(401).json({ msg: "bad request" });
   }
 };
-module.exports = { userLogin };
+
+const userRegister = async (req, res, next) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+
+  if (user) {
+    const error = new Error();
+    error.statusCode = 409;
+    error.customMessage = "user already exists";
+
+    next(error);
+  }
+
+  const encryptedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    const newUser = await User.create({
+      username,
+      password: encryptedPassword,
+    });
+
+    res
+      .status(201)
+      .json({ user: { username: newUser.username, id: newUser.id } });
+  } catch (error) {
+    error.statusCode = 400;
+    error.customMessage = "wront user data";
+
+    next(error);
+  }
+};
+
+module.exports = { userLogin, userRegister };
+
