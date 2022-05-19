@@ -20,9 +20,8 @@ const userLogin = async (req, res) => {
 };
 
 const userRegister = async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
-
+  const { name, password } = req.body;
+  const user = await User.findOne({ name });
   if (user) {
     const error = new Error();
     error.statusCode = 409;
@@ -35,16 +34,15 @@ const userRegister = async (req, res, next) => {
 
   try {
     const newUser = await User.create({
-      username,
+      name,
       password: encryptedPassword,
     });
 
-    res
-      .status(201)
-      .json({ user: { username: newUser.username, id: newUser.id } });
+    // eslint-disable-next-line no-underscore-dangle
+    res.status(201).json({ name: newUser.name, id: newUser._id });
   } catch (error) {
     error.statusCode = 400;
-    error.customMessage = "wront user data";
+    error.customMessage = "wrong user data";
 
     next(error);
   }
