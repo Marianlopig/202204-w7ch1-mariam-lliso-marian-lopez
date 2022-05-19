@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("robots-api:root");
+const debug = require("debug")("series-api:root");
 const chalk = require("chalk");
 const connectionToDatabase = require("./db");
 const initializeServer = require("./server/initializeServer");
