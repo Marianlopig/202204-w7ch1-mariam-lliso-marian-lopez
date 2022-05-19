@@ -10,7 +10,7 @@ const userLogin = async (req, res) => {
     const token = jwt.sign(
       // eslint-disable-next-line no-underscore-dangle
       { id: user._id, name: user.name },
-      process.env.TOKEN_SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "2d" }
     );
     res.status(200).json({ token });

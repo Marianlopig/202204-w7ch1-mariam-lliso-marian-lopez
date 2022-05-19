@@ -6,7 +6,7 @@ jest.mock("jsonwebtoken", () => ({
   sign: () => mocktoken,
 }));
 
-jest.mock("../../db/models/User", () => ({
+jest.mock("../../../db/models/User", () => ({
   findOne: jest.fn().mockResolvedValue(true),
 }));
 
