@@ -1,6 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const debug = require("debug")("robots-api:connection-database");
+const debug = require("debug")("series-api:connection-database");
 const chalk = require("chalk");
 
 const connectionToDatabase = ({ username, password, database }) => {

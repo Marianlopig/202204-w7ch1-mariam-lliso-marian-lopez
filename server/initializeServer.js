@@ -1,4 +1,4 @@
-const debug = require("debug")("robots-api:initialize-server");
+const debug = require("debug")("series-api:initialize-server");
 const chalk = require("chalk");
 const app = require("./index");
 

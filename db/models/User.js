@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const FavUserSquema = new Schema({
-  name: { type: String },
+  serie_id: { type: String },
   watched: { type: Boolean },
 });
 const UserSchema = new Schema({
