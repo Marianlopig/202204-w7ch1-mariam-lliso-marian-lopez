@@ -1,14 +1,14 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const User = require("../../db/models/User");
+const User = require("../../../db/models/User");
 
 const userLogin = async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
+  const { name, password } = req.body;
+  const user = await User.findOne({ name, password });
   if (user) {
     const token = jwt.sign(
       // eslint-disable-next-line no-underscore-dangle
-      { id: user._id, username: user.username },
+      { id: user._id, name: user.name },
       process.env.TOKEN_SECRET,
       { expiresIn: "2d" }
     );
